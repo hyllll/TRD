@@ -38,21 +38,18 @@ For clarify, we use MovieLens-100k dataset as a example and treat the BPRMF meth
    python data_generator.py
    ```
 
-3.  Next,  we run the code to get the results of the teacher model.
+3.  Next,  we run the code to get the results of the teacher model. More details of arguments are available in help message : `python run_pair_mf_train.py --help`
 
    ```python
    python run_pair_mf_train.py --dataset=ml-100k --prepro=origin 
    ```
 
-   More details of arguments are available in help message : `python run_pair_mf_train.py --help`
-
-4. Finally, we train the student model and produce the refined recommendation lists on test set.
+4. Finally, we train the student model and produce the refined recommendation lists on test set. More details of arguments are available in help message : `python run_trd.py --help`
 
    ```python
    python run_trd.py --dataset=ml-100k --prepro=origin --method=bprmf --n_actions=20 --pred_score=0
    ```
 
-   More details of arguments are available in help message : `python run_trd.py --help`
 
 ## Acknowledgements
 
