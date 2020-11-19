@@ -5,7 +5,7 @@ For clarify, we use MovieLens-100k dataset as a example and treat the BPRMF meth
 - ### Data preprocess (data_generator.py)
    - Filter the datasets and split the datasets into training set, validation set and test set. 
 - ### Training the teacher model (run_pair_mf_train.py)
-   - The teacher model can be well trained by using the historical user-item interaction data. After training, we can get the distilled knowledge (i.e., user and item embeddings as well as the basic recommendation list).
+   - The teacher model can be well trained by using the historical user-item interaction data. After training, we can get the distilled knowledge (i.e., user and item embeddings as well as the basic recommendation list) from the teacher model.
 - ### Training the student model (run_trd.py)
    - We treat the distilled knowledge as the input and adopt the Deep Q-Networks (DQN) [1] as the student model. The student model aims to reinforce and refine the basic recommendation list.
 
