@@ -42,7 +42,7 @@ For clarify, we use MovieLens-100k dataset as a example and treat the BPRMF meth
 
     ```python
    python run_pair_mf_train.py --dataset=ml-100k --prepro=origin
-    ```
+   ```
 
 4. Finally, we train the student model and produce the refined recommendation lists on test set. More details of arguments are available in help message : `python run_trd.py --help`
 
