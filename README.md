@@ -1,5 +1,5 @@
 # TRD
-This is the code for a Top-aware Recommender Distillation framework - TRD with Deep Reinforcement Learning.  The TRD can absorb the essence of state-of-the-art recommenders to further improve the performance of recommendations at the top positions.
+This is the code for the Top-aware Recommender Distillation with Deep Reinforcement Learning, i.e., TRD framework. Specifically, TRD is capable of absorbing the essence of state-of-the-art recommenders to further improve the performance of recommendations at the top positions.
 ## Modules of TRD
 For clarify, we use MovieLens-100k dataset as a example and treat the BPRMF method as the teacher model in the TRD framework.
 - ### Data preprocess (data_generator.py)
