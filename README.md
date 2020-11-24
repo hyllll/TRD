@@ -36,6 +36,7 @@ For clarify, we use MovieLens-100k dataset as a example and treat the BPRMF meth
    | BPRMF    |`run_pair_mf_train.py`|
    | Item2Vec |`run_item2Vec_train.py`|
    | NeuMF    |`run_pair_neumf_train.py`|
+   
    You can also use `--help` command to get more arguments information.
 4. Finally, we train the student model and generate the refined recommendation lists on test set. More details of arguments are available in help message : `python run_trd.py --help`
    ```python
