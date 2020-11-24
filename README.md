@@ -27,6 +27,16 @@ For clarify, we use MovieLens-100k dataset as a example and treat the BPRMF meth
    ```python
    python run_pair_mf_train.py --dataset=ml-100k --prepro=origin
    ```
+   And for different teacher models, we could run the code as follows:
+   
+   |  Teacher Model  | Corresponding run file      |
+   |  :----:  | :----:|
+   | MostPop  | `run_mostpop_train.py` |
+   | ItemKNN  | `run_itemknncf_train.py` |
+   | BPRMF    |`run_pair_mf_train.py`|
+   | Item2Vec |`run_item2Vec_train.py`|
+   | NeuMF    |`run_pair_neumf_train.py`|
+   You can also use `--help` command to get more arguments information.
 4. Finally, we train the student model and generate the refined recommendation lists on test set. More details of arguments are available in help message : `python run_trd.py --help`
    ```python
    python run_trd.py --dataset=ml-100k --prepro=origin --method=bprmf --n_actions=20 --pred_score=0
