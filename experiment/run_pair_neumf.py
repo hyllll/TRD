@@ -10,8 +10,6 @@ import torch
 import torch.utils.data as data
 
 import sys
-# sys.path.append('/home/xinghua/Hongyang/Code-submit')
-sys.path.append('/home/workshop/lhy/code-submit')
 
 from daisy.model.pairwise.NeuMFRecommender import PairNeuMF
 from daisy.utils.loader import load_rate, split_test, get_ur, PairMFData
@@ -91,11 +89,7 @@ if __name__ == '__main__':
                         help='gpu card ID')
     args = parser.parse_args()
 
-    '''Test Process for Metrics Exporting'''
-    # df, user_num, item_num = load_rate(args.dataset, args.prepro)
-    # train_set, test_set = split_test(df, args.test_method, args.test_size)
 
-    # temporary used for tuning test result
     train_set1 = pd.read_csv(f'../experiment_data/train1_{args.dataset}_{args.prepro}.dat')
     train_set2 = pd.read_csv(f'../experiment_data/train2_{args.dataset}_{args.prepro}.dat')
 

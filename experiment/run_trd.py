@@ -11,8 +11,6 @@ import argparse
 import torch.backends.cudnn as cudnn
 
 import sys
-# sys.path.append('/home/xinghua/Hongyang/Code-submit')
-sys.path.append('/home/workshop/lhy/code-submit')
 
 from collections import defaultdict
 from tqdm import tqdm
@@ -34,13 +32,13 @@ class Net(nn.Module):
         self.embed_item = nn.Embedding(item_num + 1, factor_num, padding_idx=item_num)
 
         if method == 'Item2Vec' or method == 'mostpop' or method == 'itemknn' :
-            item_weights = np.random.normal(size=(item_num + 1, factor_num), scale=0.01)
+            item_weights = np.zeros((item_num + 1, factor_num))
             for k, v in model.item2vec.items():
                 if isinstance(k, int):
                     item_weights[k] = v
             self.embed_item.weight.data.copy_(torch.from_numpy(item_weights))
 
-            user_weights = np.random.normal(size=(user_num, factor_num), scale=0.01)
+            user_weights = np.zeros((user_num, factor_num))
             for k, v in model.user_vec_dict.items():
                 if isinstance(k, int):
                     user_weights[k] = v
@@ -49,7 +47,7 @@ class Net(nn.Module):
             del item_weights, user_weights
         elif method == 'bprmf':
             weight = model.embed_item.weight.cpu().detach()
-            pad = np.random.normal(size=(1, factor_num), scale=0.01)
+            pad = np.zeros((1, factor_num))
             pad = torch.FloatTensor(pad)
             weight = torch.cat([weight, pad])
             self.embed_item.weight.data.copy_(weight) 
@@ -58,16 +56,14 @@ class Net(nn.Module):
             self.embed_user.weight.data.copy_(weight)
         elif method == 'neumf':
             weight = model.embed_item_GMF.weight.cpu().detach()
-            pad = np.random.normal(size=(1, factor_num), scale=0.01)
+            pad = np.zeros((1, factor_num))
             pad = torch.FloatTensor(pad)
             weight = torch.cat([weight, pad])
             self.embed_item.weight.data.copy_(weight) 
 
             weight = model.embed_user_GMF.weight.cpu().detach()
             self.embed_user.weight.data.copy_(weight)            
-        else: 
-            nn.init.normal_(self.embed_user.weight, std=0.01)
-            nn.init.normal_(self.embed_item.weight, std=0.01)
+
 
         if self.factor_num == 32:
             self.fc1 = nn.Linear(self.factor_num * 7, 256)

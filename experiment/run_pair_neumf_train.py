@@ -10,8 +10,6 @@ import torch
 import torch.utils.data as data
 
 import sys
-sys.path.append('/home/xinghua/Hongyang/Code-submit')
-# sys.path.append('/home/workshop/lhy/code-submit')
 
 from daisy.model.pairwise.NeuMFRecommender import PairNeuMF
 from daisy.utils.loader import load_rate, split_test, get_ur, PairMFData
@@ -164,7 +162,6 @@ if __name__ == '__main__':
     test_ucands = defaultdict(list)
     for k, v in train2_ur.items():
         sample_num = candidates_num - len(v) if len(v) < candidates_num else 0
-        # sub_item_pool = item_pool - v - total_train_ur[k] - validate_ur[k]# remove GT & interacted
         sub_item_pool = item_pool - v - train1_ur[k] - test_ur[k]
         sample_num = min(len(sub_item_pool), sample_num)
         if sample_num == 0:

@@ -11,14 +11,10 @@ import argparse
 import torch.backends.cudnn as cudnn
 
 import sys
-# sys.path.append('/home/xinghua/Hongyang/Code-submit')
-sys.path.append('/home/workshop/lhy/code-submit')
 
 from collections import defaultdict
-# from memory_profiler import profile
 from tqdm import tqdm
 from daisy.model.KNNCFRecommender import ItemKNNCF
-# from daisy.model.TRDRecommender import TRD, get_next_state, get_reward, create_initial_state
 from daisy.utils.loader import load_rate, split_test, get_ur, PairMFData, get_ur_l
 from daisy.utils.metrics import precision_at_k, recall_at_k, map_at_k, hr_at_k, mrr_at_k, ndcg_at_k
 
@@ -35,13 +31,13 @@ class Embed(nn.Module):
 
         if pretrain:
             if method == 'Item2Vec':
-                item_weights = np.random.normal(size=(item_num + 1, factor_num), scale=0.01)
+                item_weights = np.zeros((item_num + 1, factor_num))
                 for k, v in model.item2vec.items():
                     if isinstance(k, int):
                         item_weights[k] = v
                 self.embed_item.weight.data.copy_(torch.from_numpy(item_weights))
 
-                user_weights = np.random.normal(size=(user_num, factor_num), scale=0.01)
+                user_weights = np.zeros((user_num, factor_num))
                 for k, v in model.user_vec_dict.items():
                     if isinstance(k, int):
                         user_weights[k] = v
@@ -51,18 +47,14 @@ class Embed(nn.Module):
 
             if method == 'bprmf':
                 weight = model.embed_item.weight.cpu().detach()
-                pad = np.random.normal(size=(1, factor_num), scale=0.01)
+                pad = np.zeros((1, factor_num))
                 pad = torch.FloatTensor(pad)
                 weight = torch.cat([weight, pad])
                 self.embed_item.weight.data.copy_(weight) 
 
                 weight = model.embed_user.weight.cpu().detach()
                 self.embed_user.weight.data.copy_(weight)
-                print("embedding load completed")
-        else:
-            print("not load item2vec")
-            nn.init.normal_(self.embed_user.weight, std=0.01)
-            nn.init.normal_(self.embed_item.weight, std=0.01)              
+                print("embedding load completed")           
 
 class Actor(nn.Module):
     def __init__(self, embedding, factor_num=32, gpuid='0'):

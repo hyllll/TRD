@@ -11,8 +11,6 @@ import torch
 import torch.utils.data as data
 
 import sys
-sys.path.append('/home/xinghua/Hongyang/Code-submit')
-# sys.path.append('/home/workshop/lhy/code-submit')
 
 from daisy.model.Item2VecRecommender import Item2Vec
 from daisy.utils.loader import load_rate, split_test, get_ur, BuildCorpus, PermutedSubsampledCorpus

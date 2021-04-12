@@ -10,8 +10,7 @@ import torch
 import torch.utils.data as data
 
 import sys
-# sys.path.append('/home/xinghua/Hongyang/Code-submit')
-sys.path.append('/home/workshop/lhy/code-submit')
+
 
 from daisy.model.KNNCFRecommender import ItemKNNCF
 from daisy.utils.loader import load_rate, split_test, get_ur
@@ -51,9 +50,6 @@ if __name__ == '__main__':
                         help='The (min) number of neighbors to take into account')
     args = parser.parse_args()
 
-    '''Test Process for Metrics Exporting'''
-    # df, user_num, item_num = load_rate(args.dataset, args.prepro, binary=False)
-    # train_set, test_set = split_test(df, args.test_method, args.test_size)
 
     #temporary used for tuning test result
     train_set1 = pd.read_csv(f'../experiment_data/train1_{args.dataset}_{args.prepro}.dat')
@@ -83,7 +79,6 @@ if __name__ == '__main__':
     
     # get ground truth
     test_ur = get_ur(test_set)
-    # validate_ur = get_ur(validate_set)
     total_train_ur = get_ur(train_set)
 
     # initial candidate item pool

@@ -7,19 +7,12 @@ import pandas as pd
 from tqdm import tqdm
 
 import sys
-# sys.path.append('/home/xinghua/Hongyang/Code-submit')
-sys.path.append('/home/workshop/lhy/code-submit')
 
 from daisy.model.MostPopRecommender import MostPop
 from daisy.utils.loader import load_rate, split_test, get_ur
 from daisy.utils.metrics import precision_at_k, recall_at_k, map_at_k, hr_at_k, mrr_at_k, ndcg_at_k
 
 if __name__ == '__main__':
-    # load logger configuration
-    # logging.config.fileConfig("./log.conf")
-    # logger_name = 'MostPop'
-    # logger = logging.getLogger(logger_name)
-    # logger.debug('MostPop experiment running...')
 
     parser = argparse.ArgumentParser(description='Most-Popular recommender test')
     # common settings
@@ -45,10 +38,6 @@ if __name__ == '__main__':
                         help='Initial selected number of Most-popular')
     args = parser.parse_args()
 
-    '''Test Process for Metrics Exporting'''
-    # df, user_num, item_num = load_rate(args.dataset, args.prepro)
-    # train_set, test_set = split_test(df, args.test_method, args.test_size)
-
     #temporary used for tuning test result
     train_set1 = pd.read_csv(f'../experiment_data/train1_{args.dataset}_{args.prepro}.dat')
     train_set2 = pd.read_csv(f'../experiment_data/train2_{args.dataset}_{args.prepro}.dat')
@@ -57,10 +46,8 @@ if __name__ == '__main__':
 
     train_set1['rating'] = 1.0
     train_set2['rating'] = 1.0
-    # validate_set['rating'] = 1.0
     test_set['rating'] = 1.0
     train_set = pd.concat([train_set1, train_set2], ignore_index=True)
-    # df = pd.concat([train_set, validate_set, test_set], ignore_index=True)
     
     split_idx = len(train_set)
     df = pd.concat([train_set,  test_set], ignore_index=True)
